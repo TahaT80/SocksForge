@@ -52,7 +52,7 @@ This repository ships **three independent CLI tools** you can run separately or 
 Requirements: **Python 3.8+**
 
 ```bash
-git clone https://github.com/<your-username>/SocksForge.git
+git clone https://github.com/TahaT80/SocksForge.git
 cd SocksForge
 ```
 
