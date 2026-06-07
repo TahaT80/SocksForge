@@ -1,4 +1,4 @@
-<div align="center">
+<div dir="rtl">
 
 ```
    _____            __        ______                     
@@ -9,142 +9,146 @@
     /_/                                                  
 ```
 
-### Fast • Multi-threaded • No Dependencies Beyond the Standard Library
+<div align="center">
 
-A unified toolkit for **discovering SOCKS5 proxies** and **validating CDN-fronted IPs** for TLS tunnels.
-Built for researchers, network engineers, and anyone who needs to find working proxy servers at scale.
+### سریع • چند‌نخی • بدون وابستگی به کتابخانهٔ خارجی
 
-[Features](#-features) • [Tools](#-tools) • [Installation](#-installation) • [Usage](#-usage) • [Output](#-output-format) • [Disclaimer](#-disclaimer)
+یک جعبه‌ابزار یکپارچه برای **کشف پروکسی‌های SOCKS5** و **اعتبارسنجی IPهای CDN-Fronting** برای تانل‌های TLS.
+ساخته‌شده برای محققان، مهندسان شبکه، و هر کسی که نیاز دارد پروکسی‌های سالم را در مقیاس بالا پیدا کند.
+
+[ویژگی‌ها](#-ویژگیها) • [ابزارها](#-ابزارها) • [نصب](#-نصب) • [استفاده](#-استفاده) • [خروجی](#-فرمت-خروجی) • [هشدار](#-هشدار-مهم)
+
+> 🇬🇧 **[English version](./README.en.md)** is also available.
 
 </div>
 
 ---
 
-## ✨ Features
+## ✨ ویژگی‌ها
 
-- 🔥 **Blazing-fast scanning** — multi-threaded engine with adaptive rate-limiting (up to ~500 req/s)
-- 🎯 **5 scan modes** — specific range, random prioritised ranges, fast single-port, from-file, full port sweep
-- 🇮🇷 **Iran-priority IP generator** — focuses on residential and ISP ranges known to host working SOCKS5 endpoints
-- 🛡️ **CDN Fronting tester** — verifies IPs that work with a given SNI for TLS-based tunnels (v2ray, fragment, etc.)
-- 📊 **Quality scoring** — every found proxy is benchmarked for response time, throughput, and reliability
-- 💾 **Auto-save** — results are timestamped and dropped into the `result/` folder, plus ready-to-use `t.me/socks?…` deep links for Telegram
-- 🎨 **Coloured terminal UI** — clear progress bars, live speed, and live hit counter
-- 🪶 **Lightweight** — `IP&PROXY FINDER.py` and `cdn_tester.py` use **only the Python standard library**
+- 🔥 **اسکن فوق‌العاده سریع** — موتور چند‌نخی با محدودسازی نرخ تطبیقی (تا ~۵۰۰ درخواست بر ثانیه)
+- 🎯 **۵ حالت اسکن** — رنج مشخص، تصادفی اولویت‌دار، پورت واحد، از فایل، درگاه‌های متعدد
+- 🇮🇷 **تولید IP با اولویت ایران** — تمرکز بر رنج‌های ISP و رزیدنتیال که میزبان SOCKS5 سالم هستند
+- 🛡️ **تستر CDN Fronting** — بررسی IPهایی که با یک SNI مشخص برای تانل‌های TLS کار می‌کنند (v2ray، fragment و ...)
+- 📊 **امتیازدهی کیفیت** — هر پروکسی پیدا‌شده از نظر زمان پاسخ، سرعت دانلود و پایداری سنجیده می‌شود
+- 💾 **ذخیرهٔ خودکار** — نتایج با timestamp در پوشهٔ `result/` ذخیره می‌شوند، به‌علاوهٔ لینک‌های مستقیم `t.me/socks?…` تلگرام
+- 🎨 **رابط ترمینال رنگی** — نوار پیشرفت زنده، سرعت لحظه‌ای و شمارندهٔ نتایج
+- 🪶 **کم‌حجم** — دو ابزار از سه ابزار (**`IP&PROXY FINDER.py`** و **`cdn_tester.py`**) **فقط با کتابخانهٔ استاندارد پایتون** کار می‌کنند
 
 ---
 
-## 🧰 Tools
+## 🧰 ابزارها
 
-This repository ships **three independent CLI tools** you can run separately or together.
+این مخزن شامل **سه ابزار خط‌فرمان مستقل** است که می‌توانید جداگانه یا در کنار هم اجرا کنید.
 
-| Script | Purpose | External deps |
+| اسکریپت | کاربرد | وابستگی خارجی |
 | --- | --- | --- |
-| `IP&PROXY FINDER.py` | SOCKS5 proxy scanner with 5 scan modes and live progress | **None** (stdlib only) |
-| `Find port from IP.py` | Port-finder + quality benchmark (latency / speed / reliability) | `requests` |
-| `cdn_tester.py` | CDN-fronting / SNI-spoofing IP validator (TLS handshake on port 443) | **None** (stdlib only) |
+| `IP&PROXY FINDER.py` | اسکنر SOCKS5 با ۵ حالت اسکن و پیشرفت زنده | **ندارد** (فقط stdlib) |
+| `Find port from IP.py` | پیدا‌کنندهٔ پورت + بنچمارک کیفیت (تأخیر / سرعت / پایداری) | `requests` |
+| `cdn_tester.py` | اعتبارسنجی CDN-Fronting / SNI-Spoofing (TLS روی پورت ۴۴۳) | **ندارد** (فقط stdlib) |
 
 ---
 
-## 📦 Installation
+## 📦 نصب
 
-Requirements: **Python 3.8+**
+پیش‌نیاز: **Python 3.8+**
 
 ```bash
 git clone https://github.com/<your-username>/SocksForge.git
 cd SocksForge
 ```
 
-Optional — only needed for the port-finder quality benchmark:
+اختیاری — فقط برای بنچمارک کیفیت ابزار `Find port from IP.py` لازم است:
 
 ```bash
 pip install requests
 ```
 
-> 💡 Two of the three tools work out of the box on any fresh Python install.
+> 💡 دو ابزار از سه ابزار، بدون هیچ پیش‌نیاز اضافه‌ای روی یک نصب تازهٔ پایتون اجرا می‌شوند.
 
 ---
 
-## 🚀 Usage
+## 🚀 استفاده
 
-### 1. SOCKS5 Proxy Finder (main tool)
+### ۱. SOCKS5 Proxy Finder (ابزار اصلی)
 
 ```bash
 python "IP&PROXY FINDER.py"
 ```
 
-Interactive menu:
+منوی تعاملی:
 
 ```
-SELECT SCAN MODE:
-  1. SCAN SPECIFIC RANGE (e.g., 62.220.126.x)
-  2. RANDOM SCAN (priority to known working ranges)
-  3. FAST PORT SCAN (check only port 29678 - very fast)
-  4. SCAN FROM FILE (load IP list from text file)
-  5. SCAN ALL PORTS (1080, 31405, 32193, 9050, etc.)
-  0. EXIT
+انتخاب حالت اسکن:
+  1. اسکن رنج مشخص (مثلاً: 62.220.126.x)
+  2. اسکن تصادفی (اولویت با رنج‌های شناخته‌شده)
+  3. اسکن سریع پورت (فقط پورت 29678 - خیلی سریع)
+  4. اسکن از فایل (بارگذاری لیست IP از فایل متنی)
+  5. اسکن همهٔ پورت‌ها (1080, 31405, 32193, 9050, ...)
+  0. خروج
 ```
 
-| Mode | Use it when… |
+| حالت | کِی استفاده کنید |
 | --- | --- |
-| **1 – Specific range** | You have a known IP prefix (e.g. `62.220.126`) and want to enumerate it |
-| **2 – Random scan** | You want to discover new proxies across prioritised ISP ranges |
-| **3 – Fast port** | You only need to test a single high-yield port (e.g. `29678`) on thousands of IPs |
-| **4 – From file** | You already have a list of candidate IPs in `ips.txt` |
-| **5 – All ports** | Full sweep across common SOCKS ports (1080, 9050, 31405, 32193, …) |
+| **۱ – رنج مشخص** | پیشوند IP مشخصی دارید (مثلاً `62.220.126`) و می‌خواهید همه را پیمایش کنید |
+| **۲ – اسکن تصادفی** | می‌خواهید در رنج‌های ISP اولویت‌دار، پروکسی جدید کشف کنید |
+| **۳ – پورت واحد** | فقط می‌خواهید یک پورت پُربازده (مثلاً `29678`) را روی هزاران IP تست کنید |
+| **۴ – از فایل** | از قبل لیست کاندیداها در `ips.txt` دارید |
+| **۵ – همهٔ پورت‌ها** | جاروب کامل روی پورت‌های رایج SOCKS (1080, 9050, 31405, 32193, ...) |
 
-You will be asked for two parameters:
+بعد دو پارامتر از شما پرسیده می‌شود:
 
 ```
-Threads  (10-50, default 20)
-Timeout  (1-3  seconds, default 2)
+تعداد نخ‌ها  (10-50، پیش‌فرض 20)
+تأخیر مجاز  (1-3  ثانیه، پیش‌فرض 2)
 ```
 
-### 2. Port Finder + Quality Benchmark
+### ۲. پیدا‌کنندهٔ پورت + بنچمارک کیفیت
 
 ```bash
 python "Find port from IP.py"
 ```
 
-For every IP, it tries a list of candidate ports, runs the full SOCKS5 handshake, then **scores** each working proxy on:
+برای هر IP، لیستی از پورت‌های کاندیدا را امتحان می‌کند، handshake کامل SOCKS5 را اجرا می‌کند، و سپس هر پروکسی سالم را بر اساس این معیارها **امتیازدهی** می‌کند:
 
-- ⏱️  response time (ms)
-- 🚀  download speed (Mbps)
-- 🎯  reliability (3 consecutive HTTP requests)
+- ⏱️  زمان پاسخ (میلی‌ثانیه)
+- 🚀  سرعت دانلود (مگابیت بر ثانیه)
+- 🎯  پایداری (۳ درخواست HTTP متوالی موفق)
 
-Best candidates are written to `result/`.
+بهترین کاندیداها در `result/` ذخیره می‌شوند.
 
-### 3. CDN Fronting Tester
+### ۳. CDN Fronting Tester
 
 ```bash
 python cdn_tester.py
 ```
 
-Reads IPs from `ips.txt` and checks which ones successfully complete a TLS handshake with a target SNI (default `www.hcaptcha.com`). Useful for:
+IPها را از `ips.txt` می‌خواند و بررسی می‌کند کدام‌یک با SNI هدف (پیش‌فرض `www.hcaptcha.com`) handshake TLS موفق دارند. مناسب برای:
 
-- v2ray / Xray TLS tunnels
-- fragment-based anti-censorship tools
-- SNI-spoofing configurations
+- تانل‌های v2ray / Xray
+- ابزارهای ضد سانسور مبتنی بر fragment
+- پیکربندی‌های SNI-Spoofing
 
-Tweak the constants at the top of the file:
+ثابت‌ها را در ابتدای فایل تنظیم کنید:
 
 ```python
-TARGET_SNI = "www.hcaptcha.com"   # the SNI you want to spoof
-TIMEOUT    = 5                    # seconds
-THREADS    = 50                   # concurrent workers
-TEST_PORT  = 443                  # TLS port
+TARGET_SNI = "www.hcaptcha.com"   # SNI که می‌خواهید spoof کنید
+TIMEOUT    = 5                    # ثانیه
+THREADS    = 50                   # تعداد نخ‌های هم‌زمان
+TEST_PORT  = 443                  # پورت TLS
 ```
 
 ---
 
-## 📁 Output Format
+## 📁 فرمت خروجی
 
-Every scan writes a timestamped file into `result/`:
+هر اسکن یک فایل timestamp‌دار در `result/` می‌نویسد:
 
 ```
 result/Find IP_20260107_224512.txt
 ```
 
-Example content:
+نمونهٔ محتوا:
 
 ```
 # IP Finder 
@@ -162,55 +166,55 @@ https://t.me/socks?server=185.146.43.18&port=1080
 ...
 ```
 
-The first block contains the **raw IPs**, the second block contains **ready-to-use Telegram deep-links**. Open them on a phone with Telegram installed to import the proxy in one tap.
+بلوک اول شامل **IPهای خام** و بلوک دوم شامل **لینک‌های آمادهٔ تلگرام** است. آن‌ها را در گوشی و در تلگرام باز کنید تا پروکسی با یک tap اضافه شود.
 
 ---
 
-## ⚙️ How it works
+## ⚙️ نحوهٔ کار
 
 ```
 ┌──────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│  IP source   │ -> │  TCP port probe  │ -> │ SOCKS5 handshake│
-│  (range /    │    │  (connect_ex)    │    │  (RFC 1928)     │
-│   file /     │    └──────────────────┘    └────────┬────────┘
-│   random)    │                                      │
+│  منبع IP     │ -> │  پروب پورت TCP   │ -> │ handshake SOCKS5│
+│  (رنج /      │    │  (connect_ex)    │    │  (RFC 1928)     │
+│   فایل /     │    └──────────────────┘    └────────┬────────┘
+│   تصادفی)    │                                      │
 └──────────────┘                                      v
                                             ┌─────────────────┐
-                                            │  Quality score  │
-                                            │ (optional, tool │
-                                            │   #2 only)      │
+                                            │ امتیاز کیفیت    │
+                                            │ (اختیاری، فقط   │
+                                            │  ابزار شماره ۲) │
                                             └─────────────────┘
 ```
 
-The SOCKS5 handshake performs a `CONNECT 8.8.8.8:53` request — a robust, DNS-independent liveness check that is valid on every IPv4 host.
+handshake SOCKS5 یک درخواست `CONNECT 8.8.8.8:53` ارسال می‌کند — یک تست زنده‌بودن قوی و مستقل از DNS که روی هر هاست IPv4 معتبر است.
 
 ---
 
-## 🗂️ Project structure
+## 🗂️ ساختار پروژه
 
 ```
 SocksForge/
-├── IP&PROXY FINDER.py     # main SOCKS5 scanner (stdlib only)
-├── Find port from IP.py   # port scanner + quality benchmark
-├── cdn_tester.py          # CDN-fronting / SNI-spoofing tester
-├── ips.txt                # candidate IP list (one per line)
-├── result/                # auto-created; scan outputs land here
+├── IP&PROXY FINDER.py     # اسکنر اصلی SOCKS5 (فقط stdlib)
+├── Find port from IP.py   # اسکنر پورت + بنچمارک کیفیت
+├── cdn_tester.py          # تستر CDN-Fronting / SNI-Spoofing
+├── ips.txt                # لیست کاندیدای IP (هر کدام در یک خط)
+├── result/                # به‌صورت خودکار ساخته می‌شود؛ خروجی اسکن اینجاست
 └── README.md
 ```
 
 ---
 
-## 🛠️ Tips for better hit-rates
+## 🛠️ نکات برای hit-rate بهتر
 
-- 🕐 Run scans at **off-peak hours** (e.g. 02:00 – 06:00 local time of the target range)
-- 🌍 Combine **mode 2 (random)** with a wide count (10k–20k) for best discovery
-- 🎯 For a known-good range, prefer **mode 1** with a custom port range
-- 🧪 Always cross-check found proxies with **mode 2 of `Find port from IP.py`** — a fast port hit is not the same as a *stable* proxy
-- 🚫 Avoid `172.16.x.x` and `10.x.x.x` — the generator already filters these reserved ranges
+- 🕐 اسکن را در **ساعت کم‌ترافیک** اجرا کنید (مثلاً ۰۲:۰۰ تا ۰۶:۰۰ به‌وقت محلیِ رنج هدف)
+- 🌍 **حالت ۲ (تصادفی)** را با تعداد بالا (۱۰ تا ۲۰ هزار) ترکیب کنید تا بهترین کشف را داشته باشید
+- 🎯 برای رنج شناخته‌شده، **حالت ۱** را با رنج پورت سفارشی ترجیح دهید
+- 🧪 پروکسی‌های پیدا‌شده را همیشه با **حالت ۲ از `Find port from IP.py`** راستی‌آزمایی کنید — یک hit سریع پورت، معادل پروکسی *پایدار* نیست
+- 🚫 از رنج‌های `172.16.x.x` و `10.x.x.x` پرهیز کنید — تولید‌کننده این رنج‌های رزرو‌شده را حذف می‌کند
 
 ---
 
-## 🧪 Tested on
+## 🧪 تست‌شده روی
 
 - Windows 10 / 11
 - Ubuntu 22.04
@@ -220,38 +224,40 @@ Python 3.8 – 3.12.
 
 ---
 
-## 🤝 Contributing
+## 🤝 مشارکت
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull Request خوش‌آمد است. برای تغییرات بزرگ، لطفاً ابتدا یک Issue باز کنید تا در مورد آن گفتگو شود.
 
-Ideas for contributions:
+ایده‌هایی برای مشارکت:
 
-- Async (`asyncio` + `aiohttp`) port of the scanner
-- Support for SOCKS4 and HTTP CONNECT proxies
-- GeoIP-aware range prioritisation
-- Web dashboard for live results
-
----
-
-## ⚠️ Disclaimer
-
-This project is provided **for educational and research purposes only**.
-
-- Scanning hosts you do not own or have explicit permission to test **may be illegal** in your jurisdiction.
-- The author(s) do not condone using this tool to violate any law, terms of service, or third-party rights.
-- The CDN-fronting tester is intended for legitimate anti-censorship research. Respect the terms of every CDN you interact with.
-- **You are solely responsible for your use of this software.**
-
-By downloading, cloning, or running any script in this repository, you accept full responsibility for complying with all applicable laws.
+- پورت Async (`asyncio` + `aiohttp`) از اسکنر
+- پشتیبانی از SOCKS4 و HTTP CONNECT
+- اولویت‌دهی رنج مبتنی بر GeoIP
+- داشبورد وب برای نمایش زندهٔ نتایج
 
 ---
 
-## 📜 License
+## ⚠️ هشدار مهم
 
-MIT — see `LICENSE` (add one if you plan to publish).
+این پروژه **صرفاً برای اهداف آموزشی و پژوهشی** ارائه می‌شود.
+
+- اسکن هاست‌هایی که مالک آن‌ها نیستید یا اجازهٔ صریح تست ندارید، **ممکن است در حوزهٔ قضایی شما غیرقانونی** باشد.
+- نویسنده(ها) استفاده از این ابزار برای نقض هر قانون، شرایط خدمات، یا حقوق شخص ثالث را تأیید نمی‌کنند.
+- تستر CDN-Fronting برای پژوهش‌های مشروع ضد سانسور در نظر گرفته شده است. به شرایط هر CDN که با آن تعامل دارید احترام بگذارید.
+- **مسئولیت کامل استفاده از این نرم‌افزار بر عهدهٔ خود شماست.**
+
+با دانلود، کلون، یا اجرای هر یک از اسکریپت‌های این مخزن، مسئولیت کامل رعایت تمام قوانین قابل‌اجرا را می‌پذیرید.
+
+---
+
+## 📜 لایسنس
+
+MIT — در صورت انتشار، فایل `LICENSE` را نیز اضافه کنید.
 
 ---
 
 <div align="center">
-Made with 🛠️ + ☕ — happy hunting.
+ساخته‌شده با 🛠️ + ☕ — شکار خوبی داشته باشید.
+</div>
+
 </div>
